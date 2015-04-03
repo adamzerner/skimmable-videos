@@ -6,7 +6,7 @@
 angular.module('skimmableVideosApp')
   .controller('FormCtrl', FormCtrl);
 
-function FormCtrl($stateParams, $http) {
+function FormCtrl($stateParams, $http, API_KEY) {
   this.skim = {
     sections: [
       { subsections: [{}] }
@@ -15,7 +15,6 @@ function FormCtrl($stateParams, $http) {
 
   // CREATE
   if (typeof $stateParams.id === 'undefined') {
-    var API_KEY = '';
     var videoId = $stateParams.videoId;
     this.state = 'create';
 

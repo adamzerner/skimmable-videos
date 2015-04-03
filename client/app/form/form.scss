@@ -1,0 +1,12 @@
+form[name='createForm'] {
+  .form-header {
+    width: 650px;
+  }
+  textarea {
+    resize: vertical;
+  }
+  .close {
+    float: none;
+    font-size: 17px;
+  }
+}

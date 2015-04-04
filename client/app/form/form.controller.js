@@ -13,6 +13,8 @@ function FormCtrl($stateParams, $http, API_KEY) {
     ]
   };
 
+  $("#test").markdown({autofocus:false,savable:false});
+
   // CREATE
   if (typeof $stateParams.id === 'undefined') {
     var videoId = $stateParams.videoId;

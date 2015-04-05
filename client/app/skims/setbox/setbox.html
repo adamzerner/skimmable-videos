@@ -1,36 +1,31 @@
 <div class='setbox'>
-  <label>Thumbnail</label><br />
-  <img src=''><br />
+  <label>Thumbnail</label>
+  <img ng-show='setboxCtrl.curr.thumbnail' src='{{setboxCtrl.curr.thumbnail}}'><br />
   <input 
-    class='form-control'
+    class='form-control input-sm'
     type='url'
     ng-model='setboxCtrl.curr.thumbnail'
     placeholder='placeholder.jpg'>
-  <button
-    class='btn btn-default btn-block'
-    type='button'>
-    SET
-  </button>
 
   <hr />
 
   <label>Start Time</label>
   <div class='time-inputs'>
     <input
-      class='form-control'
+      class='form-control input-sm'
       ng-model='setboxCtrl.curr.hour'
       placeholder='hh'> : 
     <input
-      class='form-control'
+      class='form-control input-sm'
       ng-model='setboxCtrl.curr.minute'
       placeholder='mm'> :
     <input
-      class='form-control'
+      class='form-control input-sm'
       ng-model='setboxCtrl.curr.second'
       placeholder='ss'>
   </div>
   <button
-    class='btn btn-default btn-block'
+    class='btn btn-default btn-block btn-sm'
     type='button'>
     SET
   </button>

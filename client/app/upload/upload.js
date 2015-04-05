@@ -6,6 +6,9 @@ angular.module('skimmableVideosApp')
       .state('upload', {
         url: '/upload',
         templateUrl: 'app/upload/upload.html',
-        controller: 'UploadCtrl as uploadCtrl'
+        controller: 'UploadCtrl as uploadCtrl',
+        authenticate: {
+          loggedIn: true
+        }
       });
   });

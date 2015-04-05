@@ -6,14 +6,13 @@
 angular.module('skimmableVideosApp')
   .controller('FormCtrl', FormCtrl);
 
-function FormCtrl($stateParams, $http, API_KEY) {
+function FormCtrl($stateParams, $http, API_KEY, Auth) {
   this.skim = {
+    author: Auth.getCurrentUser(),
     sections: [
       { subsections: [{}] }
     ]
   };
-
-  $("#test").markdown({autofocus:false,savable:false});
 
   // CREATE
   if (typeof $stateParams.id === 'undefined') {

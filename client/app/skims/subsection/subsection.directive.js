@@ -10,6 +10,7 @@ angular.module('skimmableVideosApp')
       templateUrl: 'app/skims/subsection/subsection.html',
       scope: {
         subsection: '=',
+        parentNumber: '=',
         number: '='
       },
       require: '^supersection',

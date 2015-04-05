@@ -12,6 +12,7 @@ angular.module('skimmableVideosApp')
         $(element).markdown({
           resize: 'vertical',
           height: '200',
+          iconlibrary: 'fa',
           onChange: function(e){
             ngModel.$setViewValue(e.getContent());
           }

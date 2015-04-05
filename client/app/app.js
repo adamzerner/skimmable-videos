@@ -44,10 +44,21 @@ angular.module('skimmableVideosApp', [
   .run(function ($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
-      Auth.isLoggedInAsync(function(loggedIn) {
-        if (next.authenticate && !loggedIn) {
-          $location.path('/login');
-        }
-      });
+      // if (typeof next.authenticate !== 'undefined') {
+      //   Auth.isLoggedInAsync(function(loggedIn) {
+      //     if (next.authenticate.loggedIn && !loggedIn) {
+      //       alert('Must be logged in to access this route.');
+      //       $location.path('/login');
+      //     }
+      //     if (next.authenticate.authorized && Auth.getCurrentUser().id !== $location.url().split('/')[2]) {
+      //       alert('Unauthorized. Must be signed in as the right user.');
+      //       $location.path('/login');
+      //     }
+      //     if (next.authenticate.admin && !Auth.isAdmin()) {
+      //       alert('Must be an admin to access this route.');
+      //       $location.path('/login');
+      //     }
+      //   });
+      // }
     });
   });

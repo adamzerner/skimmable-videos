@@ -15,7 +15,11 @@
     "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1",
     "angular-ui-router": "~0.2.10",
-    "bootstrap-markdown": "~2"
+    "bootstrap-markdown": "~2.8.0",
+    "markdown": "~0.5.0",
+    "marked": "~0.3.3",
+    "to-markdown": "~0.0.3",
+    "jquery.hotkeys": "jeresig/jquery.hotkeys#~0.2.0"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",

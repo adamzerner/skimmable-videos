@@ -24,9 +24,7 @@ function SectionCtrl() {
   };
   this.removeSubsection = function(subsection) {
     var index = this.section.subsections.indexOf(subsection);
-    console.log(this.section.subsections);
     this.section.subsections.splice(index, 1);
-    console.log(this.section.subsections);
   };
 }
 

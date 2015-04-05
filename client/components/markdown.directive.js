@@ -4,29 +4,14 @@
 'use strict';
 
 angular.module('skimmableVideosApp')
-  // .directive('markdown', function () {
-  //   return {
-  //     restrict: 'E',
-  //     require:  'ngModel',
-  //     link: function (scope, element, attrs, ngModel) {
-  //       $(element).markdown({
-  //         savable: true,
-  //         onChange: function(e){
-  //           scope.$apply(function() {
-  //             ngModel.$setViewValue(e.getContent());
-  //           });
-  //         }
-  //       });
-  //     }
-  //   }
-  // });
-  .directive("markdownEditor", function () {
+  .directive('markdown', function () {
     return {
-      restrict: "A",
+      restrict: 'E',
       require:  'ngModel',
-      link:     function (scope, element, attrs, ngModel) {
+      link: function (scope, element, attrs, ngModel) {
         $(element).markdown({
-          savable:false,
+          resize: 'vertical',
+          height: '200',
           onChange: function(e){
             ngModel.$setViewValue(e.getContent());
           }

@@ -11,7 +11,8 @@ angular.module('skimmableVideosApp')
       scope: {
         subsection: '=',
         parentNumber: '=',
-        number: '='
+        number: '=',
+        player: '='
       },
       require: '^supersection',
       bindToController: true,

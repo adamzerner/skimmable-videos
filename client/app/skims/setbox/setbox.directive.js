@@ -12,7 +12,8 @@ angular.module('skimmableVideosApp')
       restrict: 'E',
       templateUrl: 'app/skims/setbox/setbox.html',
       scope: {
-        curr: '='
+        curr: '=',
+        player: '='
       },
       bindToController: true,
       controller: SetboxCtrl,
@@ -20,9 +21,14 @@ angular.module('skimmableVideosApp')
     };
   });
 
-function SetboxCtrl(Player) {
+function SetboxCtrl() {
   this.set = function() {
-    console.dir(Player);
+    var elapsedSeconds = this.player.getCurrentTime();
+    this.curr.hour = Math.floor(elapsedSeconds / (60*60));
+    elapsedSeconds -= this.curr.hour*60*60;
+    this.curr.minute = Math.floor(elapsedSeconds/60);
+    elapsedSeconds -= this.curr.minute*60;
+    this.curr.second = Math.round(10*elapsedSeconds)/10;
   };
 }
 

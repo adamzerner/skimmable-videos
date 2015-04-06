@@ -10,7 +10,8 @@ angular.module('skimmableVideosApp')
       templateUrl: 'app/skims/section/section.html',
       scope: {
         section: '=',
-        number: '='
+        number: '=',
+        player: '='
       },
       bindToController: true,
       controller: SectionCtrl,
@@ -25,6 +26,9 @@ function SectionCtrl() {
   this.removeSubsection = function(subsection) {
     var index = this.section.subsections.indexOf(subsection);
     this.section.subsections.splice(index, 1);
+  };
+  this.test = function() {
+    console.log(this.player.getCurrentTime());
   };
 }
 

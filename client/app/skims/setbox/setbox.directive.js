@@ -20,8 +20,10 @@ angular.module('skimmableVideosApp')
     };
   });
 
-function SetboxCtrl() {
-
+function SetboxCtrl(Player) {
+  this.set = function() {
+    console.dir(Player);
+  };
 }
 
 

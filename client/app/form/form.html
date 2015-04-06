@@ -18,10 +18,19 @@
     </div>
   </div>
 
+  <div class="embed-responsive embed-responsive-16by9">
+    <youtube-video 
+      video-url='formCtrl.skim.url'
+      player='formCtrl.player'
+      class='embed-responsive-item'>
+    </youtube-video>
+  </div>
+
   <supersection 
     ng-repeat='section in formCtrl.skim.sections'
     section='section'
-    number='$index+1'>
+    number='$index+1'
+    player='formCtrl.player'>
   </supersection>
   <hr />
   <button 
@@ -35,4 +44,6 @@
 
 <hr />
 
-<pre>{{ formCtrl.skim | json:2 }}</pre>
+<button ng-click='formCtrl.getTime()'>get time</button>
+
+<pre>{{ formCtrl.skim | json }}</pre>

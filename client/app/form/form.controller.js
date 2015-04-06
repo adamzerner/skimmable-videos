@@ -6,12 +6,24 @@
 angular.module('skimmableVideosApp')
   .controller('FormCtrl', FormCtrl);
 
-function FormCtrl($stateParams, $http, API_KEY, Auth) {
+function FormCtrl($scope, $stateParams, $http, API_KEY, Auth, Player) {
   this.skim = {
     author: Auth.getCurrentUser(),
     sections: [
       { subsections: [{}] }
     ]
+  };
+
+  this.player = Player.player;
+
+  this.getTime = function() {
+    var elapsedSeconds = $scope.player.getCurrentTime();
+    var hour = Math.floor(elapsedSeconds / (60*60));
+    elapsedSeconds -= hour*60*60;
+    var minute = Math.floor(elapsedSeconds/60);
+    elapsedSeconds -= minute*60;
+    var second = Math.round(10*elapsedSeconds)/10;
+    console.log(hour + ', ' + minute + ', ' + second);
   };
 
   // CREATE
@@ -25,8 +37,8 @@ function FormCtrl($stateParams, $http, API_KEY, Auth) {
         var item = result.items[0];
         self.skim.title = item.snippet.title;
         self.skim.description = item.snippet.description;
-        self.skim.url = 'https://www.youtube.com/watch?v='+videoId;
-        self.skim.embedUrl = youtubeToEmbed(self.skim.url);
+        self.skim.url = 'https://www.youtube.com/watch?v=' + videoId;
+        self.skim.embedUrl = 'https://www.youtube.com/embed/' + videoId + '?showinfo=0&enablejsapi=1'
         var duration = window.nezasa.iso8601.Period.parse(item.contentDetails.duration, true);
         self.skim.hours = duration[4];
         self.skim.minutes = duration[5];
@@ -49,24 +61,6 @@ function FormCtrl($stateParams, $http, API_KEY, Auth) {
     });
   };
 }
-
-function youtubeToEmbed(url) {
-  var id = getIdFromUrl(url);
-  return 'https://www.youtube.com/embed/' + id + '?showinfo=0&enablejsapi=1'; // removed &origin=http://localhost:9000
-}
-
-function getIdFromUrl(url) {
-  var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-  var match = url.match(regExp);
-
-  if (match && match[2].length == 11) {
-    return match[2];
-  } 
-  else {
-    throw new Error('problem getting id from youtube url');
-  }
-}
-
 
 
 })();

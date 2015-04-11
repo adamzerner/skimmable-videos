@@ -58,6 +58,10 @@ function FormCtrl($scope, $stateParams, $http, API_KEY, Auth) {
       subsections: [{}]
     });
   };
+
+  this.submit = function() {
+    console.dir(this.dir);
+  };
 }
 
 

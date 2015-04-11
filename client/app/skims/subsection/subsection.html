@@ -14,7 +14,11 @@
       <setbox curr='subsectionCtrl.subsection' player='subsectionCtrl.player'></setbox>
     </div>
     <div class='col-sm-8'>
-      <markdown ng-model='subsectionCtrl.subsection.description'></markdown>
+      <textarea 
+        markdown 
+        placeholder='optional subsection description' 
+        ng-model='subsectionCtrl.subsection.description'>
+      </textarea>
     </div>
   </div>
 </section>

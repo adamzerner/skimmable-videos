@@ -6,13 +6,16 @@
 angular.module('skimmableVideosApp')
   .controller('FormCtrl', FormCtrl);
 
-function FormCtrl($scope, $stateParams, $http, API_KEY, Auth) {
+function FormCtrl($scope, $stateParams, $http, API_KEY, Auth, Player) {
   this.skim = {
     author: Auth.getCurrentUser(),
     sections: [
       { subsections: [{}] }
     ]
   };
+
+  this.player = Player.player;
+  // Player.player = this.player -> undefined when set() is called
 
   this.getTime = function() {
     var elapsedSeconds = $scope.player.getCurrentTime();

@@ -21,14 +21,9 @@ angular.module('skimmableVideosApp')
     };
   });
 
-function SetboxCtrl() {
+function SetboxCtrl(Player) {
   this.set = function() {
-    var elapsedSeconds = this.player.getCurrentTime();
-    this.curr.hour = Math.floor(elapsedSeconds / (60*60));
-    elapsedSeconds -= this.curr.hour*60*60;
-    this.curr.minute = Math.floor(elapsedSeconds/60);
-    elapsedSeconds -= this.curr.minute*60;
-    this.curr.second = Math.round(10*elapsedSeconds)/10;
+    console.log('Player.player: ', Player.player);
   };
 }
 

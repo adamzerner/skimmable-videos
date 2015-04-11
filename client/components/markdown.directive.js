@@ -6,7 +6,7 @@
 angular.module('skimmableVideosApp')
   .directive('markdown', function () {
     return {
-      restrict: 'E',
+      restrict: 'A',
       require:  'ngModel',
       link: function (scope, element, attrs, ngModel) {
         $(element).markdown({

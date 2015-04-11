@@ -1,5 +1,5 @@
 <div class='setbox'>
-  <label>Thumbnail</label>
+  <label>Thumbnail</label> <small>(optional)</small>
   <img ng-show='setboxCtrl.curr.thumbnail' src='{{setboxCtrl.curr.thumbnail}}'><br />
   <input 
     class='form-control input-sm'
@@ -14,15 +14,18 @@
     <input
       class='form-control input-sm'
       ng-model='setboxCtrl.curr.hour'
-      placeholder='hh'> : 
+      placeholder='hh'
+      required> : 
     <input
       class='form-control input-sm'
       ng-model='setboxCtrl.curr.minute'
-      placeholder='mm'> :
+      placeholder='mm'
+      required> :
     <input
       class='form-control input-sm'
       ng-model='setboxCtrl.curr.second'
-      placeholder='ss'>
+      placeholder='ss'
+      required>
   </div>
   <button
     ng-click='setboxCtrl.set()'

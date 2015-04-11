@@ -5,7 +5,7 @@ angular.module('skimmableVideosApp')
     $stateProvider
       .state('skims', {
         url: '/skims',
-        templateUrl: 'app/skims/skims.html',
-        controller: 'SkimsCtrl'
+        templateUrl: 'app/skims/list/skims.html',
+        controller: 'SkimsCtrl as skimsCtrl'
       });
   });

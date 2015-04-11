@@ -10,7 +10,7 @@ angular.module('skimmableVideosApp')
   .directive('setbox', function () {
     return {
       restrict: 'E',
-      templateUrl: 'app/skims/setbox/setbox.html',
+      templateUrl: 'app/skims/form/setbox/setbox.html',
       scope: {
         curr: '=',
         player: '='

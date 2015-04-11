@@ -7,7 +7,7 @@ angular.module('skimmableVideosApp')
   .directive('supersection', function () {
     return {
       restrict: 'E',
-      templateUrl: 'app/skims/section/section.html',
+      templateUrl: 'app/skims/form/section/section.html',
       scope: {
         section: '=',
         number: '=',

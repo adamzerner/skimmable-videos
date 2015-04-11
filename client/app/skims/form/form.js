@@ -5,7 +5,7 @@ angular.module('skimmableVideosApp')
     $stateProvider
       .state('create', {
         url: '/create/:videoId',
-        templateUrl: 'app/form/form.html',
+        templateUrl: 'app/skims/form/form.html',
         controller: 'FormCtrl as formCtrl',
         authenticate: {
           loggedIn: true
@@ -13,7 +13,7 @@ angular.module('skimmableVideosApp')
       })
       .state('edit', {
         url: '/edit/:id',
-        templateUrl: 'app/form/form.html',
+        templateUrl: 'app/skims/form/form.html',
         controller: 'FormCtrl as formCtrl',
         authenticate: {
           loggedIn: true,

@@ -7,7 +7,7 @@ angular.module('skimmableVideosApp')
   .directive('subsection', function () {
     return {
       restrict: 'E',
-      templateUrl: 'app/skims/subsection/subsection.html',
+      templateUrl: 'app/skims/form/subsection/subsection.html',
       scope: {
         subsection: '=',
         parentNumber: '=',

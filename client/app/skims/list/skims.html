@@ -1,0 +1,11 @@
+<div class='page-header'>
+  <h1>Skims</h1>
+</div>
+
+<ul class="list-group">
+  <li ng-repeat="skim in skimsCtrl.skims" class="list-group-item">
+    <img src="{{skim.thumbnail}}"><br />
+    <a ui-sref="show({id: skim._id})" ui-sref-opts="{reload: true}">{{skim.title}}</a>
+    <p>{{skim.description}}</p>
+  </li>
+</ul>

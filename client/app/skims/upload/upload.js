@@ -5,7 +5,7 @@ angular.module('skimmableVideosApp')
     $stateProvider
       .state('upload', {
         url: '/upload',
-        templateUrl: 'app/upload/upload.html',
+        templateUrl: 'app/skims/upload/upload.html',
         controller: 'UploadCtrl as uploadCtrl',
         authenticate: {
           loggedIn: true

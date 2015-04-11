@@ -6,9 +6,9 @@
 angular.module('skimmableVideosApp')
   .controller('FormCtrl', FormCtrl);
 
-function FormCtrl($scope, $stateParams, $http, API_KEY, Auth) {
+function FormCtrl($scope, $stateParams, $http, API_KEY, Auth, Skim, $state) {
   this.skim = {
-    author: Auth.getCurrentUser(),
+    // author: Auth.getCurrentUser()._id,
     sections: [
       { subsections: [{}] }
     ]
@@ -36,7 +36,8 @@ function FormCtrl($scope, $stateParams, $http, API_KEY, Auth) {
         self.skim.title = item.snippet.title;
         self.skim.description = item.snippet.description;
         self.skim.url = 'https://www.youtube.com/watch?v=' + videoId;
-        self.skim.embedUrl = 'https://www.youtube.com/embed/' + videoId + '?showinfo=0&enablejsapi=1'
+        self.skim.embedUrl = 'https://www.youtube.com/embed/' + videoId + '?showinfo=0&enablejsapi=1';
+        self.skim.thumbnail = item.snippet.thumbnails.default.url;
         var duration = window.nezasa.iso8601.Period.parse(item.contentDetails.duration, true);
         self.skim.hours = duration[4];
         self.skim.minutes = duration[5];
@@ -60,7 +61,14 @@ function FormCtrl($scope, $stateParams, $http, API_KEY, Auth) {
   };
 
   this.submit = function() {
-    console.dir(this.dir);
+    Skim.save(this.skim)
+      .success(function() {
+        console.log('success');
+        $state.go('skims');
+      })
+      .error(function() {
+        console.error('error');
+      });
   };
 }
 

@@ -35,7 +35,6 @@ function FormCtrl($scope, $stateParams, $http, API_KEY, Auth, Skim, $state) {
         vm.skim.title = item.snippet.title;
         vm.skim.description = item.snippet.description;
         vm.skim.url = 'https://www.youtube.com/watch?v=' + videoId;
-        vm.skim.embedUrl = 'https://www.youtube.com/embed/' + videoId + '?showinfo=0&enablejsapi=1';
         vm.skim.thumbnail = item.snippet.thumbnails.default.url;
         var duration = window.nezasa.iso8601.Period.parse(item.contentDetails.duration, true);
         vm.skim.hours = duration[4];

@@ -27,7 +27,6 @@ var SkimSchema = new Schema({
   minutes: { type: Number, min: 0, max: 59, required: true },
   seconds: { type: Number, min: 1, max: 59, required: true },
   url: { type: String, required: true },
-  embedUrl: { type: String, required: true },
   thumbnail: { type: String, required: true },
   author: { type: Schema.Types.ObjectId, ref: 'User' }, // required: true
   category: { type: Schema.Types.ObjectId, ref: 'Category' },

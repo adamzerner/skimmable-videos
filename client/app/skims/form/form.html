@@ -1,8 +1,8 @@
 <div class='page-header'>
-  <h1>Create a Skim</h1>
+  <h1>{{formCtrl.state}} <span ng-show="formCtrl.state === 'Create'">a</span> Skim</h1>
 </div>
 
-<form name='createForm' class='form-horizontal' ng-submit='formCtrl.submit()' novalidate>
+<form name='form' class='form-horizontal' ng-submit='formCtrl.submit()' novalidate>
   <div class='form-header'>
     <div class='form-group'>
       <label class='col-sm-2 control-label'>Title</label>
@@ -26,11 +26,13 @@
     </youtube-video>
   </div>
 
+
   <supersection 
     ng-repeat='section in formCtrl.skim.sections'
     section='section'
     number='$index+1'
-    player='formCtrl.player'>
+    player='formCtrl.player'
+    remove-section='formCtrl.removeSection(section)'>
   </supersection>
   <hr />
   <button 
@@ -43,8 +45,8 @@
   <button
     class='btn btn-primary btn-block'
     type='submit'
-    ng-disabled='createForm.$invalid'>
-    Create Skim
+    ng-disabled='form.$invalid'>
+    {{formCtrl.state}} Skim
   </button>
 
 </form>

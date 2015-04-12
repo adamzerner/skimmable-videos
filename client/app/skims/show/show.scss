@@ -1,0 +1,32 @@
+#show-page {
+  .right-side {
+    border-left: 1px solid #ddd;
+  }
+  img {
+    width: 100%;
+  }
+  .subsection {
+    padding: 5px 0;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+  }
+  .subsection:hover {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: #F0F0F0;
+    cursor: pointer;
+    img {
+      background: url('/assets/images/overlay-hover.png');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+  }
+  .col-xs-11 {
+    .subsection:first-of-type {
+      padding-top: 0;
+    }
+    .subsection:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+}

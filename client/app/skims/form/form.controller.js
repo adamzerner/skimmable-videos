@@ -27,7 +27,7 @@ function FormCtrl($scope, $stateParams, $http, API_KEY, Auth, Skim, $state) {
   // CREATE
   if (typeof $stateParams.id === 'undefined') {
     var videoId = $stateParams.videoId;
-    vm.state = 'create';
+    vm.state = 'Create';
 
     $http.get('https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='+videoId+'&key='+API_KEY)
       .success(function(result) {
@@ -45,9 +45,9 @@ function FormCtrl($scope, $stateParams, $http, API_KEY, Auth, Skim, $state) {
         console.error('YouTube API request for ' + vm.skim.url + ' failed.');
       });
   }
-  // EDIT
+  // UPDATE
   else {
-    vm.state = 'edit';
+    vm.state = 'Update';
     Skim.get($stateParams.id)
       .success(function(skim) {
         vm.skim = skim;
@@ -58,6 +58,11 @@ function FormCtrl($scope, $stateParams, $http, API_KEY, Auth, Skim, $state) {
     vm.skim.sections.push({
       subsections: [{}]
     });
+  };
+
+  vm.removeSection = function(section) {
+    var index = vm.skim.sections.indexOf(section);
+    vm.skim.sections.splice(index, 1);
   };
 
   vm.submit = function() {

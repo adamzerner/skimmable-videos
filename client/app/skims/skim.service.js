@@ -4,7 +4,7 @@ angular.module('skimmableVideosApp')
       // create or update depending on whether _id is present
       if (skim._id) {
         console.log('update');
-        return $http.put('/api/skims/'+skim_id, skim)
+        return $http.put('/api/skims/'+skim._id, skim)
       }
       else  {
         console.log('create');

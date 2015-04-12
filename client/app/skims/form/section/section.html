@@ -1,6 +1,16 @@
 <hr />
 <section class='section'>
-  <p><small>Section {{sectionCtrl.number}}</small></p>
+  <p>
+    <small>
+      Section {{sectionCtrl.number}}
+      <button 
+        class='removeSection close'
+        type='button'
+        ng-click='sectionCtrl.removeSection()'>
+        &times;
+      </button>
+    </small>
+  </p>
 
   <label>Title</label>
   <input class='form-control' ng-model='sectionCtrl.section.title' required><br>

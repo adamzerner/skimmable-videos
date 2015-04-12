@@ -8,11 +8,11 @@ angular.module('skimmableVideosApp')
   .controller('SkimsCtrl', SkimsCtrl);
 
 function SkimsCtrl(Skim) {
-  var self = this;
+  var vm = this;
   Skim.list()
     .success(function(skims) {
-      self.skims = skims;
-    })
+      vm.skims = skims;
+    });
 }
 
 

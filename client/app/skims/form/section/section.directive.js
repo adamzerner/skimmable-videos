@@ -20,15 +20,16 @@ angular.module('skimmableVideosApp')
   });
 
 function SectionCtrl() {
-  this.addSubsection = function() {
-    this.section.subsections.push({});
+  var vm = this;
+  vm.addSubsection = function() {
+    vm.section.subsections.push({});
   };
-  this.removeSubsection = function(subsection) {
-    var index = this.section.subsections.indexOf(subsection);
-    this.section.subsections.splice(index, 1);
+  vm.removeSubsection = function(subsection) {
+    var index = vm.section.subsections.indexOf(subsection);
+    vm.section.subsections.splice(index, 1);
   };
-  this.test = function() {
-    console.log(this.player.getCurrentTime());
+  vm.test = function() {
+    console.log(vm.player.getCurrentTime());
   };
 }
 

@@ -15,4 +15,8 @@ angular.module('skimmableVideosApp')
     this.list = function() {
       return $http.get('/api/skims');
     };
+
+    this.get = function(id) {
+      return $http.get('/api/skims/'+id);
+    };
   });

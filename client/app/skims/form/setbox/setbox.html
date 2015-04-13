@@ -1,6 +1,11 @@
 <div class='setbox'>
   <label>Thumbnail</label> <small>(opitonal)</small>
-  <img ng-show='setboxCtrl.curr.thumbnail' src='{{setboxCtrl.curr.thumbnail}}'><br />
+  <div class='embed-responsive embed-responsive-16by9' ng-show='setboxCtrl.curr.thumbnail'>
+    <img 
+      class='embed-responsive-item'
+      src='{{setboxCtrl.curr.thumbnail}}' />
+  </div>
+  <br />
   <input 
     class='form-control input-sm'
     type='url'

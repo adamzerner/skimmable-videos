@@ -15,7 +15,7 @@
   <h3>
     {{section.title}}
     <small>todo: duration</small>
-    <a href='#{{section._id}}' class='sectionAnchor'><small>
+    <a href='#{{section._id}}' class='section-anchor'><small>
       <span id='{{section._id}}' class='glyphicon glyphicon-link'></span>
     </small></a>
   </h3>
@@ -33,7 +33,7 @@
 
     <div class='col-xs-6 right-side'> <!-- right half; subsections -->
       <section ng-repeat='subsection in section.subsections' class='row subsection'>
-        <div class='col-xs-11'> <!-- main -->
+        <div class='col-xs-11' ng-click='showCtrl.play(section.player, subsection)'> <!-- main -->
           <div class='row subsectionMain'>
             <div class='col-sm-3 col-xs-12'>
               <div class='embed-responsive embed-responsive-16by9'>
@@ -52,7 +52,7 @@
         </div>
 
         <div class='col-xs-1'> <!-- anchor link -->
-          <a href='#{{section._id}}-{{$index}}'>
+          <a href='#{{section._id}}-{{$index}}' class='subsection-anchor'>
             <span class='glyphicon glyphicon-link' id='{{section._id}}-{{$index}}'></span>
           </a>
         </div>

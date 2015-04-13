@@ -20,6 +20,12 @@ function ShowCtrl (Skim, $stateParams) {
         return duration;
       };
     });
+
+  vm.play = function(player, subsection) {
+    var seconds = subsection.hour*60*60 + subsection.minute*60 + subsection.second;
+    player.seekTo(seconds);
+    player.playVideo();
+  };
 }
 
 

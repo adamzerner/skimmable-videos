@@ -46,7 +46,7 @@
               </div>
             </div>
             <div class='col-sm-9 col-xs-12'>
-              <p>{{subsection.description}}</p>
+              <p ng-bind-html='subsection.description | markdown'></p>
             </div>
           </div>
         </div>

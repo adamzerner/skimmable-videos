@@ -6,7 +6,8 @@ angular.module('skimmableVideosApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'youtube-embed'
+  'youtube-embed',
+  'markdown'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

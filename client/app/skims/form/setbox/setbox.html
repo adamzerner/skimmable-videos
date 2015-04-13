@@ -15,27 +15,36 @@
   <hr />
 
   <label>Start Time</label>
-  <div class='time-inputs'>
+  <div class='time-inputs visible-lg-block'>
     <input
       class='form-control input-sm'
       ng-model='setboxCtrl.curr.hour'
+      type='number'
       placeholder='hh'
       required> : 
     <input
       class='form-control input-sm'
       ng-model='setboxCtrl.curr.minute'
+      type='number'
       placeholder='mm'
       required> :
     <input
       class='form-control input-sm'
       ng-model='setboxCtrl.curr.second'
+      type='number'
       placeholder='ss'
       required>
+  </div>
+  <div class='hidden-lg'>
+    <span>{{setboxCtrl.curr.hour}}</span> : 
+    <span>{{setboxCtrl.curr.minute}}</span> : 
+    <span>{{setboxCtrl.curr.second}}</span>
   </div>
   <button
     ng-click='setboxCtrl.set()'
     class='btn btn-default btn-block btn-sm'
     type='button'>
-    SET
+    <span class='visible-md-inline visible-lg-inline'>SET TO POINT IN VIDEO</span>
+    <span class='visible-xs-inline visible-sm-inline'>SET</span>
   </button>
 </div>

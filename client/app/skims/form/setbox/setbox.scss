@@ -13,8 +13,12 @@
   .time-inputs input {
     display: inline-block;
     width: 50px;
+    text-align: center;
   }
   button {
     margin-top: 10px;
+  }
+  input[type='number'] {
+    padding-right: 0px;
   }
 }

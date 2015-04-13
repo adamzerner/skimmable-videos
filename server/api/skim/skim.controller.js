@@ -34,7 +34,7 @@ exports.update = function(req, res) {
   Skim.findById(req.params.id, function (err, skim) {
     if (err) { return handleError(res, err); }
     if(!skim) { return res.send(404); }
-    var updated = _.merge(skim, req.body);
+    var updated = _.extend(skim, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, skim);

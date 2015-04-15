@@ -6,22 +6,13 @@
 angular.module('skimmableVideosApp')
   .controller('FormCtrl', FormCtrl);
 
-function FormCtrl($scope, $stateParams, $http, API_KEY, Auth, Skim, $state) {
+function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview) {
   var vm = this;
   vm.skim = {
     // author: Auth.getCurrentUser()._id,
     sections: [
       { subsections: [{}] }
     ]
-  };
-
-  vm.getTime = function() {
-    var elapsedSeconds = $scope.player.getCurrentTime();
-    var hour = Math.floor(elapsedSeconds / (60*60));
-    elapsedSeconds -= hour*60*60;
-    var minute = Math.floor(elapsedSeconds/60);
-    elapsedSeconds -= minute*60;
-    var second = Math.round(10*elapsedSeconds)/10;
   };
 
   // CREATE
@@ -66,13 +57,11 @@ function FormCtrl($scope, $stateParams, $http, API_KEY, Auth, Skim, $state) {
   };
 
   vm.submit = function() {
-    Skim.save(vm.skim)
-      .success(function() {
-        $state.go('skims');
-      })
-      .error(function() {
-        console.error('Unable to save skim.');
-      });
+    Skim.save(vm.skim);
+  };
+
+  vm.preview = function() {
+    Preview.create(vm.skim); // creates preview and goes to view in new tab
   };
 }
 

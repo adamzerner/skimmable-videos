@@ -7,5 +7,10 @@ angular.module('skimmableVideosApp')
         url: '/show/:id',
         templateUrl: 'app/skims/show/show.html',
         controller: 'ShowCtrl as showCtrl'
+      })
+      .state('preview', {
+        url: '/preview/:previewId',
+        templateUrl: 'app/skims/show/show.html',
+        controller: 'ShowCtrl as showCtrl'
       });
   });

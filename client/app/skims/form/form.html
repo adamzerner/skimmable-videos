@@ -26,6 +26,14 @@
     </youtube-video>
   </div>
 
+  <br />
+  <button
+   class='btn btn-default btn-block'
+   type='button'
+   ng-disabled='form.$invalid'
+   ng-click='formCtrl.preview()'>
+   Preview Skim <span class='glyphicon glyphicon-new-window'></span>
+ </button>
 
   <supersection 
     ng-repeat='section in formCtrl.skim.sections'
@@ -50,7 +58,3 @@
   </button>
 
 </form>
-
-<hr />
-
-<pre>{{ formCtrl.skim | json }}</pre>

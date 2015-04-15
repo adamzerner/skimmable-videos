@@ -7,20 +7,34 @@
 angular.module('skimmableVideosApp')
   .controller('ShowCtrl', ShowCtrl);
 
-function ShowCtrl (Skim, $stateParams) {
+function ShowCtrl (Skim, $stateParams, Preview) {
   var vm = this;
-  Skim.get($stateParams.id)
-    .success(function(skim) { 
-      vm.skim = skim;
-      vm.getDuration = function() {
-        var duration = '(';
-        if (vm.skim.hours > 0) duration += vm.skim.hours + ' hours, ';
-        duration += vm.skim.minutes + ' minutes, ';
-        duration += vm.skim.seconds + ' seconds)';
-        return duration;
-      };
-      getSkimDurations();      
-    });
+
+  if ($stateParams.id) { // show
+    Skim.get($stateParams.id)
+      .success(function(skim) { 
+        vm.skim = skim;     
+      })
+      .then(afterSkimRetrieved);
+  }
+  else { // preview
+    Preview.get($stateParams.previewId)
+      .success(function(skim) {
+        vm.skim = skim;
+      })
+      .then(afterSkimRetrieved);
+  }
+
+  function afterSkimRetrieved() {
+    vm.getDuration = function() {
+      var duration = '(';
+      if (vm.skim.hours > 0) duration += vm.skim.hours + ' hours, ';
+      duration += vm.skim.minutes + ' minutes, ';
+      duration += vm.skim.seconds + ' seconds)';
+      return duration;
+    };
+    getSkimDurations(); 
+  }
 
   vm.play = function(player, subsection) {
     var seconds = subsection.hour*60*60 + subsection.minute*60 + subsection.second;
@@ -30,7 +44,6 @@ function ShowCtrl (Skim, $stateParams) {
 
   function getSkimDurations() {
     var curr, next, currStart, nextStart, hours, minutes, seconds, noSubsections;
-    debugger;
     for (var i = 0, len = vm.skim.sections.length; i < len; i++) {
       curr = vm.skim.sections[i];
       next = vm.skim.sections[i+1] 

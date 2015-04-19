@@ -17,7 +17,7 @@ angular.module('skimmableVideosApp')
         controller: 'FormCtrl as formCtrl',
         authenticate: {
           loggedIn: true,
-          authorized: true
+          // authorized: true
         }
       });
   });

@@ -46,24 +46,27 @@ angular.module('skimmableVideosApp', [
   .run(function ($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
-      // if (typeof next.authenticate !== 'undefined') {
-      //   Auth.isLoggedInAsync(function(loggedIn) {
-      //     if (next.authenticate.loggedIn && !loggedIn) {
-      //       alert('Must be logged in to access this route.');
-      //       console.log('one');
-      //       $location.path('/login');
-      //     }
-      //     if (next.authenticate.authorized && Auth.getCurrentUser().id !== $location.url().split('/')[2]) {
-      //       alert('Unauthorized. Must be signed in as the right user.');
-      //       console.log('two');
-      //       $location.path('/login');
-      //     }
-      //     if (next.authenticate.admin && !Auth.isAdmin()) {
-      //       alert('Must be an admin to access this route.');
-      //       console.log('three');
-      //       $location.path('/login');
-      //     }
-      //   });
-      // }
+      if (typeof next.authenticate !== 'undefined') {
+        Auth.isLoggedInAsync(function(loggedIn) {
+          if (next.authenticate.loggedIn && !loggedIn) {
+            alert('Must be logged in to access this route.');
+            console.log('next.authenticate.loggedIn: ', next.authenticate.loggedIn);
+            console.log('loggedIn: ', loggedIn);
+            // $location.path('/login');
+          }
+          if (next.authenticate.authorized && Auth.getCurrentUser().id !== $location.url().split('/')[2]) {
+            alert('Unauthorized. Must be signed in as the right user.');
+            console.log('next.authenticate.authorized: ', next.authenticate.authorized);
+            console.log('Auth.getCurrentUser().id !== $location.url().split('/')[2]: ', Auth.getCurrentUser().id !== $location.url().split('/')[2]);
+            // $location.path('/login');
+          }
+          if (next.authenticate.admin && !Auth.isAdmin()) {
+            alert('Must be an admin to access this route.');
+            console.log('next.authenticate.admin: ', next.authenticate.admin);
+            console.log('!Auth.isAdmin(): ', !Auth.isAdmin());
+            // $location.path('/login');
+          }
+        });
+      }
     });
   });

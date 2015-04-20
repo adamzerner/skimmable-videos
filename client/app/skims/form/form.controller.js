@@ -20,10 +20,8 @@ function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview) {
     var videoId = $stateParams.videoId;
     vm.state = 'Create';
 
-    console.log('before request');
     $http.get('https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id='+videoId+'&key='+API_KEY)
       .success(function(result) {
-        console.log('success');
         var item = result.items[0];
         vm.skim.title = item.snippet.title;
         vm.skim.description = item.snippet.description;
@@ -35,8 +33,7 @@ function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview) {
         vm.skim.seconds = duration[6];
       })
       .error(function() {
-        console.log('error');
-        // console.error('YouTube API request failed.');
+        console.error('YouTube API request failed.');
       });
   }
   // UPDATE

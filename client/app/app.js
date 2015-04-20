@@ -21,9 +21,12 @@ angular.module('skimmableVideosApp', [
     return {
       // Add authorization token to headers
       request: function (config) {
-        config.headers = config.headers || {};
-        if ($cookieStore.get('token')) {
-          config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
+        // Auth token causes 401
+        if (config.url !== 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id=vifsqv_QXB0&key=AIzaSyDngy9xWiBHwqSdYW1QVtvxn-8K8256wsI') {
+          config.headers = config.headers || {};
+          if ($cookieStore.get('token')) {
+            config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
+          }
         }
         return config;
       },
@@ -50,21 +53,15 @@ angular.module('skimmableVideosApp', [
         Auth.isLoggedInAsync(function(loggedIn) {
           if (next.authenticate.loggedIn && !loggedIn) {
             alert('Must be logged in to access this route.');
-            console.log('next.authenticate.loggedIn: ', next.authenticate.loggedIn);
-            console.log('loggedIn: ', loggedIn);
-            // $location.path('/login');
+            $location.path('/login');
           }
           if (next.authenticate.authorized && Auth.getCurrentUser().id !== $location.url().split('/')[2]) {
             alert('Unauthorized. Must be signed in as the right user.');
-            console.log('next.authenticate.authorized: ', next.authenticate.authorized);
-            console.log('Auth.getCurrentUser().id !== $location.url().split('/')[2]: ', Auth.getCurrentUser().id !== $location.url().split('/')[2]);
-            // $location.path('/login');
+            $location.path('/login');
           }
           if (next.authenticate.admin && !Auth.isAdmin()) {
             alert('Must be an admin to access this route.');
-            console.log('next.authenticate.admin: ', next.authenticate.admin);
-            console.log('!Auth.isAdmin(): ', !Auth.isAdmin());
-            // $location.path('/login');
+            $location.path('/login');
           }
         });
       }

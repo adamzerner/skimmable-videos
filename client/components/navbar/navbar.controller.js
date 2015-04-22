@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('skimmableVideosApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth, $state) {
+  .controller('NavbarCtrl', function ($scope, $rootScope, $location, Auth, $state) {
     $scope.menu = [{
       'title': 'Skims',
       'link': '/skims'
@@ -26,4 +26,9 @@ angular.module('skimmableVideosApp')
     $scope.isActive = function(state) {
       return state === $state.current.name;
     };
+
+    $rootScope.$on('refresh_navbar', function() {
+      $scope.currentUser = Auth.getCurrentUser();
+    });
   });
+  

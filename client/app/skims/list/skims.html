@@ -2,10 +2,15 @@
   <h1>Skims</h1>
 </div>
 
-<ul class="list-group">
-  <li ng-repeat="skim in skimsCtrl.skims" class="list-group-item">
-    <img src="{{skim.thumbnail}}"><br />
-    <a ui-sref="show({id: skim._id})" ui-sref-opts="{reload: true}">{{skim.title}}</a>
+<ul class='list-group'>
+  <li ng-repeat='skim in skimsCtrl.skims' class='list-group-item'>
+    <img src='{{skim.thumbnail}}'><br />
+    <a ui-sref='show({id: skim._id})' ui-sref-opts='{reload: true}'>{{skim.title}}</a>
+    <p>By 
+      <a ui-sref='user({id: skim.author._id})'>
+        {{skim.author.name}}
+      </a>
+    </p>
     <p>{{skim.description}}</p>
   </li>
 </ul>

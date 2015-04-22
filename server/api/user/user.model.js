@@ -12,6 +12,7 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
+  skimsCreated: [{ type: Schema.Types.ObjectId, ref: 'Skim' }],
   hashedPassword: String,
   provider: String,
   salt: String,

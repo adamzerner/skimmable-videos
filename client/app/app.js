@@ -22,7 +22,7 @@ angular.module('skimmableVideosApp', [
       // Add authorization token to headers
       request: function (config) {
         // Auth token causes 401
-        if (config.url !== 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails&id=vifsqv_QXB0&key=AIzaSyDngy9xWiBHwqSdYW1QVtvxn-8K8256wsI') {
+        if (config.url.indexOf('https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+contentDetails')) {
           config.headers = config.headers || {};
           if ($cookieStore.get('token')) {
             config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');

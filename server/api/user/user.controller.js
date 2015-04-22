@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('lodash');
 var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
@@ -34,17 +35,32 @@ exports.create = function (req, res, next) {
   });
 };
 
+exports.update = function(req, res) {
+  console.log('in update');
+  if (req.body._id) { delete req.body._id; }
+  User.findById(req.params.id, function(err, user) {
+    if (err) return handleError(res, err);
+    if (!user) return res.send(404);
+    var updated = _.extend(user, req.body);
+    updated.save(function(err) {
+      if (err) return handleError(res, err);
+      return res.json(200, user);
+    });
+  });
+};
+
 /**
  * Get a single user
  */
 exports.show = function (req, res, next) {
-  var userId = req.params.id;
-
-  User.findById(userId, function (err, user) {
-    if (err) return next(err);
-    if (!user) return res.send(401);
-    res.json(user.profile);
-  });
+  User
+    .findById(req.params.id)
+    .populate('skimsCreated')
+    .exec(function (err, user) {
+      if (err) return next(err);
+      if (!user) return res.send(401);
+      res.json(user);
+    });
 };
 
 /**

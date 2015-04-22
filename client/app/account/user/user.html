@@ -1,0 +1,23 @@
+<div id='user-template'>
+
+<div class='page-header'>
+  <h1>{{userCtrl.user.name}}</h1>
+</div>
+
+<p ng-show='userCtrl.user.skimsCreated.length === 0'>{{userCtrl.user.name}} hasn't created any skims.</p>
+
+<ul class='list-group'>
+  <li ng-repeat='skim in userCtrl.user.skimsCreated' class='list-group-item'>
+    <img src='{{skim.thumbnail}}'><br />
+    <a ui-sref='show({id: skim._id})' ui-sref-opts='{reload: true}'>{{skim.title}}</a>
+    <p>By {{userCtrl.user.name}}</p>
+    <p>{{skim.description}}</p>
+    <p ng-show='userCtrl.isAuthorized()'>
+      <a ui-sref='edit({id: skim._id})'>Edit</a> | 
+      <a ng-click='userCtrl.delete(skim._id)'>Delete</a>
+    </p>
+  </li>
+</ul>
+
+
+</div>

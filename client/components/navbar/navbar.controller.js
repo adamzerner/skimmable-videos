@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('skimmableVideosApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, $state) {
     $scope.menu = [{
       'title': 'Skims',
       'link': '/skims'
@@ -16,14 +16,14 @@ angular.module('skimmableVideosApp')
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.currentUser = Auth.getCurrentUser();
 
     $scope.logout = function() {
       Auth.logout();
       $location.path('/login');
     };
 
-    $scope.isActive = function(route) {
-      return route === $location.path();
+    $scope.isActive = function(state) {
+      return state === $state.current.name;
     };
   });

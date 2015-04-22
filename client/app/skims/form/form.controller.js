@@ -9,7 +9,7 @@ angular.module('skimmableVideosApp')
 function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview) {
   var vm = this;
   vm.skim = {
-    // author: Auth.getCurrentUser()._id,
+    author: Auth.getCurrentUser()._id,
     sections: [
       { subsections: [{}] }
     ]
@@ -42,6 +42,7 @@ function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview) {
     Skim.get($stateParams.id)
       .success(function(skim) {
         vm.skim = skim;
+        vm.skim.author = vm.skim.author._id;
       });
   }
 

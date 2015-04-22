@@ -5,19 +5,25 @@ var Skim = require('./skim.model');
 
 // Get list of skims
 exports.index = function(req, res) {
-  Skim.find(function (err, skims) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, skims);
-  });
+  Skim
+    .find()
+    .populate('author')
+    .exec(function(err, skims) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, skims);
+    });
 };
 
 // Get a single skim
 exports.show = function(req, res) {
-  Skim.findById(req.params.id, function (err, skim) {
-    if(err) { return handleError(res, err); }
-    if(!skim) { return res.send(404); }
-    return res.json(skim);
-  });
+  Skim
+    .findById(req.params.id)
+    .populate('author')
+    .exec(function(err, skim) {
+      if(err) { return handleError(res, err); }
+      if(!skim) { return res.send(404); }
+      return res.json(skim);
+    });
 };
 
 // Creates a new skim in the DB.

@@ -12,7 +12,8 @@ function ShowCtrl (Skim, $stateParams, Preview, Utils) {
 
   if ($stateParams.id) { // show
     Skim.get($stateParams.id)
-      .success(function(skim) { 
+      .success(function(skim) {
+        console.log(skim);
         vm.skim = skim;     
       })
       .then(afterSkimRetrieved);

@@ -13,10 +13,10 @@ angular.module('skimmableVideosApp')
         templateUrl: 'app/account/signup/signup.html',
         controller: 'SignupCtrl'
       })
-      .state('settings', {
-        url: '/settings',
-        templateUrl: 'app/account/settings/settings.html',
-        controller: 'SettingsCtrl',
+      .state('change-password', {
+        url: '/change-password',
+        templateUrl: 'app/account/change_password/change_password.html',
+        controller: 'ChangePasswordCtrl',
         authenticate: true
       });
   });

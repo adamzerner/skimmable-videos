@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/skimmablevideos-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };

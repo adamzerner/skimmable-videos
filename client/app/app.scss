@@ -23,6 +23,8 @@ body {
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';
+@import 'account/settings/settings.scss';
+@import 'account/user/user.scss';
 @import 'admin/admin.scss';
 @import 'help/help.scss';
 @import 'home/home.scss';
@@ -33,5 +35,6 @@ body {
 @import 'skims/list/skims.scss';
 @import 'skims/show/show.scss';
 @import 'skims/upload/upload.scss';
+@import 'users/users.scss';
 @import 'modal/modal.scss';
 // endinjector

@@ -2,11 +2,17 @@
 
 <div class='page-header'>
   <h2>
-    {{ showCtrl.skim.title }}
+    {{showCtrl.skim.title}}
     <small>{{ showCtrl.getDuration() }}</small>
   </h2>
 
-  <p>{{ showCtrl.skim.description }}</p>
+  <p>Author: 
+    <a ui-sref='user({id: showCtrl.skim.author._id})'>
+      {{showCtrl.skim.author.name}}
+    </a>
+  </p>
+
+  <p>{{showCtrl.skim.description}}</p>
 
   <p><a href='{{showCtrl.skim.url}}'>Watch Full Video</a></p>
 </div>

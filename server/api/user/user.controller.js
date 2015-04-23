@@ -36,7 +36,6 @@ exports.create = function (req, res, next) {
 };
 
 exports.update = function(req, res) {
-  console.log('in update');
   if (req.body._id) { delete req.body._id; }
   User.findById(req.params.id, function(err, user) {
     if (err) return handleError(res, err);
@@ -55,11 +54,21 @@ exports.update = function(req, res) {
 exports.show = function (req, res, next) {
   User
     .findById(req.params.id)
-    .populate('skimsCreated')
+    .populate('skimsCreated starredSkims drafts')
     .exec(function (err, user) {
       if (err) return next(err);
       if (!user) return res.send(401);
-      res.json(user);
+      // nested populate http://stackoverflow.com/questions/19222520/populate-nested-array-in-mongoose
+      var options = [{
+        path: 'starredSkims.author',
+        model: 'User'
+      }, {
+        path: 'drafts.author',
+        model: 'User'
+      }];
+      User.populate(user, options, function(err, user) {
+        res.json(user);
+      });
     });
 };
 
@@ -115,3 +124,7 @@ exports.me = function(req, res, next) {
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
+
+function handleError(res, err) {
+  return res.send(500, err);
+}

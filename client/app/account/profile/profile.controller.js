@@ -4,9 +4,9 @@
 'use strict';
 
 angular.module('skimmableVideosApp')
-  .controller('UserCtrl', UserCtrl);
+  .controller('ProfileCtrl', ProfileCtrl);
 
-function UserCtrl(User, $stateParams, Auth, Skim) {
+function ProfileCtrl(User, $stateParams, Auth, Skim) {
   var vm = this;
   vm.user = User.get({id: $stateParams.id});
   vm.isAuthorized = function() {

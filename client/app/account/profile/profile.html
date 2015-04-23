@@ -1,0 +1,71 @@
+<div id='profile-template'>
+
+<div class='page-header'>
+  <h1>{{profileCtrl.user.name}}</h1>
+</div>
+
+<tabset ng-show='profileCtrl.isAuthorized()'>
+  <tab heading='Skims'>
+    <br />
+    <ul class='list-group' ng-show='profileCtrl.user.skimsCreated.length > 0'>
+      <li ng-repeat='skim in profileCtrl.user.skimsCreated' class='list-group-item'>
+        <img src='{{skim.thumbnail}}'><br />
+        <a ui-sref='show({id: skim._id})' ui-sref-opts='{reload: true}'>{{skim.title}}</a>
+        <p>By {{profileCtrl.user.name}}</p>
+        <p>{{skim.description}}</p>
+        <p ng-show='profileCtrl.isAuthorized()'>
+          <a ui-sref='edit({id: skim._id})'>Edit</a> | 
+          <a ng-click='profileCtrl.delete(skim._id)'>Delete</a>
+        </p>
+      </li>
+    </ul>
+    <p ng-show='profileCtrl.user.skimsCreated.length === 0'>Empty</p>
+  </tab>
+  <tab heading='Starred'>
+    <br />
+    <ul class='list-group' ng-show='profileCtrl.user.starredSkims.length > 0'>
+      <li ng-repeat='skim in profileCtrl.user.starredSkims' class='list-group-item'>
+        <img src='{{skim.thumbnail}}'><br />
+        <a ui-sref='show({id: skim._id})' ui-sref-opts='{reload: true}'>{{skim.title}}</a>
+        <p ng-hide='profileCtrl.user._id === skim.author._id'>
+          By <a ui-sref='profile({id: skim.author._id})'>{{skim.author.name}}</a>
+        </p>
+        <p ng-show='profileCtrl.user._id === skim.author._id'>By {{skim.author.name}}</p>
+        <p>{{skim.description}}</p>
+      </li>
+    </ul>
+    <p ng-show='profileCtrl.user.starredSkims.length === 0'>Empty</p>
+  </tab>
+  <tab heading='Drafts'>
+    <br />
+    <ul class='list-group' ng-show='profileCtrl.user.drafts.length > 0'>
+      <li ng-repeat='skim in profileCtrl.user.drafts' class='list-group-item'>
+        <img src='{{skim.thumbnail}}'><br />
+        <a ui-sref='show({id: skim._id})' ui-sref-opts='{reload: true}'>{{skim.title}}</a>
+        <p ng-hide='profileCtrl.user._id === skim.author._id'>
+          By <a ui-sref='profile({id: skim.author._id})'>{{skim.author.name}}</a>
+        </p>
+        <p ng-show='profileCtrl.user._id === skim.author._id'>By {{skim.author.name}}</p>
+        <p>{{skim.description}}</p>
+      </li>
+    </ul>
+    <p ng-show='profileCtrl.user.drafts.length === 0'>Empty</p>
+  </tab>
+</tabset>
+
+<div ng-show='!profileCtrl.isAuthorized()'>
+  <ul class='list-group'>
+    <li ng-repeat='skim in profileCtrl.user.skimsCreated' class='list-group-item'>
+      <img src='{{skim.thumbnail}}'><br />
+      <a ui-sref='show({id: skim._id})' ui-sref-opts='{reload: true}'>{{skim.title}}</a>
+      <p>By {{profileCtrl.user.name}}</p>
+      <p>{{skim.description}}</p>
+      <p ng-show='profileCtrl.isAuthorized()'>
+        <a ui-sref='edit({id: skim._id})'>Edit</a> | 
+        <a ng-click='profileCtrl.delete(skim._id)'>Delete</a>
+      </p>
+    </li>
+  </ul>
+</div>
+
+</div>

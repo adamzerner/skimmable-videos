@@ -6,13 +6,12 @@
 angular.module('skimmableVideosApp')
   .controller('SettingsCtrl', SettingsCtrl);
 
-function SettingsCtrl(Auth, User, $state) {
+function SettingsCtrl(Auth, User, $state, $rootScope) {
   var vm = this;
-  vm.currUser = {};
-  angular.copy(Auth.getCurrentUser(), vm.currUser);
+  vm.currUser = Auth.getCurrentUser();
   vm.update = function() {
     User.save(vm.currUser, function(user) {
-      Auth.getCurrentUser().name = user.name; // to update navbar
+      $rootScope.$emit('refresh_navbar');
       $state.go('user', {id: user._id}, {reload: true});
     });
   };

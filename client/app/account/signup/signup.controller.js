@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('skimmableVideosApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location, $window) {
+  .controller('SignupCtrl', function ($scope, Auth, $location, $window, $rootScope) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -17,6 +17,7 @@ angular.module('skimmableVideosApp')
         .then( function() {
           // Account created, redirect to home
           $location.path('/');
+          $rootScope.$emit('refresh_navbar');
         })
         .catch( function(err) {
           err = err.data;

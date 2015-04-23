@@ -7,7 +7,7 @@
     <img src='{{skim.thumbnail}}'><br />
     <a ui-sref='show({id: skim._id})' ui-sref-opts='{reload: true}'>{{skim.title}}</a>
     <p>By 
-      <a ui-sref='user({id: skim.author._id})'>
+      <a ui-sref='profile({id: skim.author._id})'>
         {{skim.author.name}}
       </a>
     </p>

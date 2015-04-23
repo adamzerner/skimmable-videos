@@ -7,13 +7,12 @@
 angular.module('skimmableVideosApp')
   .controller('ShowCtrl', ShowCtrl);
 
-function ShowCtrl (Skim, $stateParams, Preview, Utils) {
+function ShowCtrl (Skim, $stateParams, Preview, Utils, User, Auth) {
   var vm = this;
 
   if ($stateParams.id) { // show
     Skim.get($stateParams.id)
       .success(function(skim) {
-        console.log(skim);
         vm.skim = skim;     
       })
       .then(afterSkimRetrieved);
@@ -42,6 +41,34 @@ function ShowCtrl (Skim, $stateParams, Preview, Utils) {
     var seconds = subsection.hour*60*60 + subsection.minute*60 + subsection.second;
     player.seekTo(seconds);
     player.playVideo();
+  };
+
+  vm.star = function() {
+    var currUser = Auth.getCurrentUser();
+    var index;
+    if (!vm.starred()) {
+      currUser.starredSkims.push(vm.skim._id);
+      User.save(currUser);
+    }
+    else {
+      index = currUser.starredSkims.indexOf(vm.skim._id);
+      currUser.starredSkims.splice(index, 1);
+      User.save(currUser);
+    }
+  };
+
+  vm.starred = function() {
+    if (Auth.isLoggedIn()) {
+      var currUser = Auth.getCurrentUser();
+      if (currUser.starredSkims.indexOf(vm.skim._id) !== -1) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  vm.loggedIn = function() {
+    return Auth.isLoggedIn();
   };
 
   function getSkimDurations() {

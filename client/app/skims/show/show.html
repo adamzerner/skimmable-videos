@@ -4,10 +4,20 @@
   <h2>
     {{showCtrl.skim.title}}
     <small>{{ showCtrl.getDuration() }}</small>
+    <span 
+      class='glyphicon glyphicon-star-empty'
+      ng-show='showCtrl.loggedIn() && !showCtrl.starred()'
+      ng-click='showCtrl.star()'>
+    </span>
+    <span 
+      class='glyphicon glyphicon-star'
+      ng-show='showCtrl.loggedIn() && showCtrl.starred()'
+      ng-click='showCtrl.star()'>
+    </span>
   </h2>
 
   <p>Author: 
-    <a ui-sref='user({id: showCtrl.skim.author._id})'>
+    <a ui-sref='profile({id: showCtrl.skim.author._id})'>
       {{showCtrl.skim.author.name}}
     </a>
   </p>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('skimmableVideosApp')
-  .factory('User', function ($resource) {
+  .service('User', function ($resource) {
     return $resource('/api/users/:id/:controller', {
       id: '@_id'
     },

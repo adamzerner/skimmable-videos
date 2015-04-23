@@ -28,12 +28,18 @@
 
   <br />
   <button
-   class='btn btn-default btn-block'
-   type='button'
-   ng-disabled='form.$invalid'
-   ng-click='formCtrl.preview()'>
-   Preview Skim <span class='glyphicon glyphicon-new-window'></span>
- </button>
+    class='btn btn-default btn-sm'
+    type='button'
+    ng-disabled='form.$invalid'>
+    Save to Drafts
+  </button>
+  <button
+    class='btn btn-default btn-sm'
+    type='button'
+    ng-disabled='form.$invalid'
+    ng-click='formCtrl.preview()'>
+    Preview <span class='glyphicon glyphicon-new-window'></span>
+  </button>
 
   <supersection 
     ng-repeat='section in formCtrl.skim.sections'
@@ -44,20 +50,16 @@
   </supersection>
   <hr />
   <button 
-    class='btn btn-default'
+    class='btn btn-default btn-sm'
     ng-click='formCtrl.addSection()' 
     type='button'>
-    Add Section
+    Add Section <span class='glyphicon glyphicon-plus'></span>
   </button>
   <hr />
   <button
     class='btn btn-primary btn-block'
     type='submit'
     ng-disabled='form.$invalid'>
-    {{formCtrl.state}} Skim
+    {{formCtrl.state}}
   </button>
 </form>
-
-<hr />
-
-<pre>{{formCtrl.skim | json}}</pre>

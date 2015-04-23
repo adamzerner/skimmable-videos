@@ -31,7 +31,7 @@
         <li
           ng-show='isLoggedIn()'
           ng-class="{active: isActive('user')}">
-          <a ui-sref='profile({ id: currentUser._id})'>{{currentUser.name}}</a>
+          <a id='profile' ui-sref='profile({ id: currentUser._id})'>{{currentUser.name}}</a>
         </li>
         <li 
           ng-show="isLoggedIn()" 

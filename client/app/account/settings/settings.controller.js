@@ -19,6 +19,12 @@ function SettingsCtrl(Auth, User, $state, $rootScope) {
       $state.go('profile', {id: user._id}, {reload: true});
     });
   };
+  vm.deleteAccount = function() {
+    User.remove({id: vm.currUser._id}, function() {
+      Auth.logout();
+      $state.go('home');
+    });
+  };
 }
 
 

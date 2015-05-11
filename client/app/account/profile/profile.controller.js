@@ -6,7 +6,7 @@
 angular.module('skimmableVideosApp')
   .controller('ProfileCtrl', ProfileCtrl);
 
-function ProfileCtrl(User, $stateParams, Auth, Skim) {
+function ProfileCtrl(User, $stateParams, Auth, Skim, Draft) {
   var vm = this;
   vm.user = User.get({id: $stateParams.id});
   vm.isAuthorized = function() {
@@ -17,6 +17,9 @@ function ProfileCtrl(User, $stateParams, Auth, Skim) {
   };
   vm.delete = function(id) {
     Skim.delete(id);
+  };
+  vm.deleteDraft = function(id) {
+    Draft.delete(id);
   };
 }
 

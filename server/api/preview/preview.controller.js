@@ -3,6 +3,8 @@
 var _ = require('lodash');
 var Preview = require('./preview.model');
 
+// probably just need create, show and delete
+
 // Get list of previews
 exports.index = function(req, res) {
   Preview.find(function (err, previews) {
@@ -34,7 +36,7 @@ exports.update = function(req, res) {
   Preview.findById(req.params.id, function (err, preview) {
     if (err) { return handleError(res, err); }
     if(!preview) { return res.send(404); }
-    var updated = _.merge(preview, req.body);
+    var updated = _.extend(preview, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, preview);

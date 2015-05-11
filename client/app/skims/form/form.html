@@ -30,16 +30,18 @@
   <button
     class='btn btn-default btn-sm'
     type='button'
-    ng-disabled='form.$invalid'>
-    Save to Drafts
+    ng-disabled='form.$invalid'
+    ng-click='formCtrl.preview()'>
+    Preview <span class='glyphicon glyphicon-new-window'></span>
   </button>
   <button
     class='btn btn-default btn-sm'
     type='button'
     ng-disabled='form.$invalid'
-    ng-click='formCtrl.preview()'>
-    Preview <span class='glyphicon glyphicon-new-window'></span>
+    ng-click='formCtrl.saveToDrafts()'>
+    Save to Drafts
   </button>
+  <span id='flash' class='bg-success' ng-show='formCtrl.flash'>Saved</span>
 
   <supersection 
     ng-repeat='section in formCtrl.skim.sections'
@@ -60,6 +62,6 @@
     class='btn btn-primary btn-block'
     type='submit'
     ng-disabled='form.$invalid'>
-    {{formCtrl.state}}
+    {{formCtrl.state}} Skim
   </button>
 </form>

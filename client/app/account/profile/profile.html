@@ -15,7 +15,7 @@
         <p>{{skim.description}}</p>
         <p ng-show='profileCtrl.isAuthorized()'>
           <a ui-sref='edit({id: skim._id})'>Edit</a> | 
-          <a ng-click='profileCtrl.delete(skim._id)'>Delete</a>
+          <a ng-click='profileCtrl.delete(skim._id)' class='pointer'>Delete</a>
         </p>
       </li>
     </ul>
@@ -39,14 +39,11 @@
   <tab heading='Drafts'>
     <br />
     <ul class='list-group' ng-show='profileCtrl.user.drafts.length > 0'>
-      <li ng-repeat='skim in profileCtrl.user.drafts' class='list-group-item'>
-        <img src='{{skim.thumbnail}}'><br />
-        <a ui-sref='show({id: skim._id})' ui-sref-opts='{reload: true}'>{{skim.title}}</a>
-        <p ng-hide='profileCtrl.user._id === skim.author._id'>
-          By <a ui-sref='profile({id: skim.author._id})'>{{skim.author.name}}</a>
-        </p>
-        <p ng-show='profileCtrl.user._id === skim.author._id'>By {{skim.author.name}}</p>
-        <p>{{skim.description}}</p>
+      <li ng-repeat='draft in profileCtrl.user.drafts' class='list-group-item'>
+        <img src='{{draft.thumbnail}}'><br />
+        <a ui-sref='draft({draftId: draft._id})' ui-sref-opts='{reload: true}'>{{draft.title}}</a>
+        <p>{{draft.description}}</p>
+        <a ng-click='profileCtrl.deleteDraft(draft._id)' class='pointer'>Delete</a>
       </li>
     </ul>
     <p ng-show='profileCtrl.user.drafts.length === 0'>Empty</p>
@@ -62,7 +59,7 @@
       <p>{{skim.description}}</p>
       <p ng-show='profileCtrl.isAuthorized()'>
         <a ui-sref='edit({id: skim._id})'>Edit</a> | 
-        <a ng-click='profileCtrl.delete(skim._id)'>Delete</a>
+        <a ng-click='profileCtrl.delete(skim._id)' class='pointer'>Delete</a>
       </p>
     </li>
   </ul>

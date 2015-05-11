@@ -6,8 +6,9 @@
 angular.module('skimmableVideosApp')
   .controller('FormCtrl', FormCtrl);
 
-function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview) {
+function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview, Draft, $timeout) {
   var vm = this;
+  var draftId = $stateParams.draftId;
   vm.skim = {
     author: Auth.getCurrentUser()._id,
     sections: [
@@ -16,7 +17,7 @@ function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview) {
   };
 
   // CREATE
-  if (typeof $stateParams.id === 'undefined') {
+  if ($stateParams.videoId) {
     var videoId = $stateParams.videoId;
     vm.state = 'Create';
 
@@ -37,11 +38,20 @@ function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview) {
       });
   }
   // UPDATE
-  else {
+  else if ($stateParams.id) {
     vm.state = 'Update';
     Skim.get($stateParams.id)
       .success(function(skim) {
         vm.skim = skim;
+        vm.skim.author = vm.skim.author._id;
+      });
+  }
+  // DRAFT
+  else if (draftId) {
+    vm.state = 'Create';
+    Draft.get(draftId)
+      .success(function(draft) {
+        vm.skim = draft;
         vm.skim.author = vm.skim.author._id;
       });
   }
@@ -58,11 +68,38 @@ function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview) {
   };
 
   vm.submit = function() {
-    Skim.save(vm.skim);
+    if (vm.state === 'Create') {
+      Skim.create(vm.skim);
+    }
+    else if (vm.state = 'Update') {
+      Skim.update(vm.skim);
+    }
   };
 
   vm.preview = function() {
     Preview.create(vm.skim); // creates preview and goes to view in new tab
+  };
+
+  vm.saveToDrafts = function() {
+    if (draftId) {
+      Draft.update(draftId, vm.skim)
+        .success(function() {
+          vm.flash = true;
+          $timeout(function() {
+            vm.flash = false;
+          }, 1000);
+        });
+    }
+    else {  
+      Draft.create(vm.skim)
+        .success(function(draft) {
+          draftId = draft._id;
+          vm.flash = true;
+          $timeout(function() {
+            vm.flash = false;
+          }, 1000);
+        });
+    }
   };
 }
 

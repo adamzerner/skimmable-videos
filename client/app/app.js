@@ -4,6 +4,7 @@ angular.module('skimmableVideosApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'ngAnimate',
   'ui.router',
   'ui.bootstrap',
   'youtube-embed',

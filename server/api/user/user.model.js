@@ -1,3 +1,6 @@
+// User has many Skims
+// User has many Drafts
+
 'use strict';
 
 var mongoose = require('mongoose');
@@ -14,7 +17,7 @@ var UserSchema = new Schema({
   },
   skimsCreated: [{ type: Schema.Types.ObjectId, ref: 'Skim' }],
   starredSkims: [{ type: Schema.Types.ObjectId, ref: 'Skim' }],
-  drafts: [{ type: Schema.Types.ObjectId, ref: 'Skim' }],
+  drafts: [{ type: Schema.Types.ObjectId, ref: 'Draft' }],
   hashedPassword: String,
   provider: String,
   salt: String,

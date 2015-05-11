@@ -9,4 +9,17 @@ form[name='form'] {
     float: none;
     font-size: 17px;
   }
+
+  #flash {
+    -webkit-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+    margin-left: 10px;
+    padding: 10px;
+    color: #7f8c8d;
+    border-radius: 5px;
+  }
+
+  #flash.ng-hide {
+    opacity: 0;
+  }
 }

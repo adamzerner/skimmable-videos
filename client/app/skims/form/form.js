@@ -19,5 +19,14 @@ angular.module('skimmableVideosApp')
           loggedIn: true,
           // authorized: true
         }
+      })
+      .state('draft', {
+        url: '/draft/:draftId',
+        templateUrl: 'app/skims/form/form.html',
+        controller: 'FormCtrl as formCtrl',
+        authenticate: {
+          loggedIn: true,
+          // authorized
+        }
       });
   });

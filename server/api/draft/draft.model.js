@@ -1,9 +1,13 @@
-// Skim belongs to User
+// easier for Drafts's to be separate objects
+// if I used Skim, I'd have to exclude skims with the flag of preview every time I iterated over Skims
+
+// Draft belongs to User
 
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    User = require('../user/user.model');
 
 var SubsectionSchema = new Schema({
   hour: { type: Number, min: 0, required: true },
@@ -22,7 +26,7 @@ var SectionSchema = new Schema({
   subsections: [SubsectionSchema]
 });
 
-var SkimSchema = new Schema({
+var DraftSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   hours: { type: Number, min: 0, required: true },
@@ -35,4 +39,23 @@ var SkimSchema = new Schema({
   sections: { type: [SectionSchema], required: true }
 });
 
-module.exports = mongoose.model('Skim', SkimSchema);
+DraftSchema.post('save', function(draft) {
+  var author_id = draft.author;
+  User.findById(author_id, function(err, user) {
+    user.drafts.push(draft._id);
+    user.save();
+  });
+});
+
+DraftSchema.pre('remove', function(next) {
+  var author_id = this.author;
+  var draft_id = this._id;
+  User.findById(author_id, function(err, user) {
+    var index = user.drafts.indexOf(draft_id);
+    user.drafts.splice(index, 1);
+    user.save();
+  });
+  next();
+});
+
+module.exports = mongoose.model('Draft', DraftSchema);

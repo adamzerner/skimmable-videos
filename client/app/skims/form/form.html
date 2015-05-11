@@ -37,6 +37,7 @@
   <button
     class='btn btn-default btn-sm'
     type='button'
+    ng-hide='formCtrl.state === "Update"'
     ng-disabled='form.$invalid'
     ng-click='formCtrl.saveToDrafts()'>
     Save to Drafts

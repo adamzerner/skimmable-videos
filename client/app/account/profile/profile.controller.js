@@ -19,7 +19,11 @@ function ProfileCtrl(User, $stateParams, Auth, Skim, Draft) {
     Skim.delete(id);
   };
   vm.deleteDraft = function(id) {
-    Draft.delete(id);
+    Draft.delete(id)
+      .success(function() {
+        var index = vm.user.drafts.indexOf(id);
+        vm.user.drafts.splice(index, 1);
+      });
   };
 }
 

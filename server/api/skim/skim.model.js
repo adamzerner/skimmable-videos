@@ -35,4 +35,15 @@ var SkimSchema = new Schema({
   sections: { type: [SectionSchema], required: true }
 });
 
+SkimSchema.pre('remove', function(next) {
+  var User = require('../user/user.model');
+  var author_id = this.author;
+  var skim_id = this._id;
+  User.findById(author_id, function(err, user) {
+    var index = user.skimsCreated.indexOf(skim_id);
+    user.skimsCreated.splice(index, 1);
+    user.save(next);
+  });
+});
+
 module.exports = mongoose.model('Skim', SkimSchema);

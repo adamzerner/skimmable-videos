@@ -6,8 +6,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    User = require('../user/user.model');
+    Schema = mongoose.Schema;
 
 var SubsectionSchema = new Schema({
   hour: { type: Number, min: 0, required: true },
@@ -40,22 +39,26 @@ var DraftSchema = new Schema({
 });
 
 DraftSchema.post('save', function(draft) {
+  var User = require('../user/user.model');
   var author_id = draft.author;
   User.findById(author_id, function(err, user) {
-    user.drafts.push(draft._id);
-    user.save();
+    if (user.drafts.indexOf(draft._id) === -1) {
+      user.drafts.push(draft._id);
+      user.save();
+    }
   });
 });
 
 DraftSchema.pre('remove', function(next) {
+  var User = require('../user/user.model');
   var author_id = this.author;
   var draft_id = this._id;
   User.findById(author_id, function(err, user) {
+    if (err) console.log(err);
     var index = user.drafts.indexOf(draft_id);
     user.drafts.splice(index, 1);
-    user.save();
+    user.save(next);
   });
-  next();
 });
 
 module.exports = mongoose.model('Draft', DraftSchema);

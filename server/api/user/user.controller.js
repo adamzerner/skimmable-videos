@@ -76,10 +76,22 @@ exports.show = function (req, res, next) {
  * Deletes a user
  * restriction: 'admin'
  */
+
 exports.destroy = function(req, res) {
-  User.findByIdAndRemove(req.params.id, function(err, user) {
-    if(err) return res.send(500, err);
-    return res.send(204);
+  var Draft = require('../draft/draft.model');
+  var Skim = require('../skim/skim.model');
+  User.findById(req.params.id, function(err, user) { // pre hook isn't working for some reason
+    if (err) return res.send(500, err);
+    user.skimsCreated.forEach(function(skimId) {
+      Skim.findByIdAndRemove(skimId, function() {});
+    });
+    user.drafts.forEach(function(draftId) {
+      Draft.findByIdAndRemove(draftId, function() {});
+    });
+    User.findByIdAndRemove(req.params.id, function(err, user) {
+      if(err) return res.send(500, err);
+      return res.send(204);
+    });
   });
 };
 

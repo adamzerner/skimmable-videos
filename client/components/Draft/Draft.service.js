@@ -16,6 +16,6 @@ angular.module('skimmableVideosApp')
       return $http.put('/api/drafts/'+id, draft);
     };
     this.delete = function(id) {
-      $http.delete('/api/drafts/'+id);
+      return $http.delete('/api/drafts/'+id);
     };
   });

@@ -69,6 +69,7 @@ function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview, Draft, $tim
 
   vm.submit = function() {
     if (vm.state === 'Create') {
+      if (draftId) Draft.delete(draftId);
       Skim.create(vm.skim);
     }
     else if (vm.state = 'Update') {

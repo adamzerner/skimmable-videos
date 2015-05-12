@@ -21,4 +21,19 @@
   input[type='number'] {
     padding-right: 0px;
   }
+  @media (min-width: 1200px) {
+    .set-button {
+      width: 172px;
+    }
+  }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .set-button {
+      width: 122px;
+    }
+  }
+  @media (max-width: 991px) {
+    .set-button {
+      width: 67px;
+    }
+  }
 }

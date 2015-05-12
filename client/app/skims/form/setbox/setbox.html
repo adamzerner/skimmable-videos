@@ -40,11 +40,17 @@
     <span>{{setboxCtrl.curr.minute}}</span> : 
     <span>{{setboxCtrl.curr.second}}</span>
   </div>
+  <button 
+    class='btn btn-default btn-sm'
+    ng-click='setboxCtrl.back()'
+    type='button'>
+    <span class='glyphicon glyphicon-step-backward'></span>
+  </button>
   <button
     ng-click='setboxCtrl.set()'
-    class='btn btn-default btn-block btn-sm'
+    class='btn btn-default btn-sm set-button'
     type='button'>
-    <span class='visible-md-inline visible-lg-inline'>SET TO POINT IN VIDEO</span>
-    <span class='visible-xs-inline visible-sm-inline'>SET</span>
+    <span class='visible-lg-inline'>SET TO POINT IN VIDEO</span>
+    <span class='visible-xs-inline visible-sm-inline visible-md-inline'>SET</span>
   </button>
 </div>

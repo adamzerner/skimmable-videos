@@ -37,26 +37,19 @@ exports.create = function(req, res) {
 // Updates an existing skim in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  Skim.findById(req.params.id, function (err, skim) {
+  Skim.findByIdAndUpdate(req.params.id, req.body, function(err, skim) {
     if (err) { return handleError(res, err); }
     if(!skim) { return res.send(404); }
-    var updated = _.extend(skim, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, skim);
-    });
+    return res.json(200, skim);
   });
 };
 
 // Deletes a skim from the DB.
 exports.destroy = function(req, res) {
-  Skim.findById(req.params.id, function (err, skim) {
+  Skim.findByIdAndRemove(req.params.id, function(err, skim) {
     if(err) { return handleError(res, err); }
     if(!skim) { return res.send(404); }
-    skim.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.send(204);
-    });
+    return res.send(204);
   });
 };
 

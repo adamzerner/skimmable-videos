@@ -37,23 +37,10 @@ exports.create = function (req, res, next) {
 
 exports.update = function(req, res) {
   if (req.body._id) { delete req.body._id; }
-  // User.findById(req.params.id, function(err, user) {
-  //   if (err) return handleError(res, err);
-  //   if (!user) return res.send(404);
-  //   var updated = _.extend(user, req.body); // doesn't increment the version number. causes problems with saving. see http://aaronheckmann.blogspot.com/2012/06/mongoose-v3-part-1-versioning.html
-  //   console.log('pre increment: ', updated);
-  //   updated.increment();
-  //   // updated._v = updated._v++;
-  //   console.log('post increment: ', updated);
-  //   updated.save(function(err) {
-  //     if (err) return handleError(res, err);
-  //     return res.json(200, user);
-  //   });
-  // });
   User.findByIdAndUpdate(req.params.id, req.body, function(err, user) {
     if (err) return handleError(res, err);
     if (!user) return res.send(404);
-    else return res.json(200, user);
+    return res.json(200, user);
   });
 };
 

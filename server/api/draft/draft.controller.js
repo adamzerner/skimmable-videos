@@ -37,26 +37,19 @@ exports.create = function(req, res) {
 // Updates an existing draft in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  Draft.findById(req.params.id, function (err, draft) {
+  Draft.findByIdAndUpdate(req.params.id, req.body, function(err, draft) {
     if (err) { return handleError(res, err); }
     if(!draft) { return res.send(404); }
-    var updated = _.extend(draft, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, draft);
-    });
+    return res.json(200, draft);
   });
 };
 
 // Deletes a draft from the DB.
 exports.destroy = function(req, res) {
-  Draft.findById(req.params.id, function (err, draft) {
+  Draft.findByIdAndRemove(req.params.id, function(err, draft) {
     if(err) { return handleError(res, err); }
     if(!draft) { return res.send(404); }
-    draft.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.send(204);
-    });
+    return res.send(204);
   });
 };
 

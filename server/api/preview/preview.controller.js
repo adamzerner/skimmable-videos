@@ -33,26 +33,19 @@ exports.create = function(req, res) {
 // Updates an existing preview in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  Preview.findById(req.params.id, function (err, preview) {
+  Preview.findByIdAndUpdate(req.params.id, req.body, function(err, preview) {
     if (err) { return handleError(res, err); }
     if(!preview) { return res.send(404); }
-    var updated = _.extend(preview, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, preview);
-    });
+    return res.json(200, preview);
   });
 };
 
 // Deletes a preview from the DB.
 exports.destroy = function(req, res) {
-  Preview.findById(req.params.id, function (err, preview) {
+  Preview.findByIdAndRemove(req.params.id, function(err, preview) {
     if(err) { return handleError(res, err); }
     if(!preview) { return res.send(404); }
-    preview.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.send(204);
-    });
+    return res.send(204);
   });
 };
 

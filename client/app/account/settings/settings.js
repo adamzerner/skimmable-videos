@@ -6,6 +6,9 @@ angular.module('skimmableVideosApp')
       .state('settings', {
         url: '/settings',
         templateUrl: 'app/account/settings/settings.html',
-        controller: 'SettingsCtrl as settingsCtrl'
+        controller: 'SettingsCtrl as settingsCtrl',
+        authenticate:  {
+          loggedIn: true
+        }
       });
   });

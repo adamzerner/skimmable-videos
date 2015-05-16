@@ -16,8 +16,7 @@ angular.module('skimmableVideosApp')
         templateUrl: 'app/skims/form/form.html',
         controller: 'FormCtrl as formCtrl',
         authenticate: {
-          loggedIn: true,
-          // authorized: true
+          authorized: 'skim'
         }
       })
       .state('draft', {
@@ -25,8 +24,7 @@ angular.module('skimmableVideosApp')
         templateUrl: 'app/skims/form/form.html',
         controller: 'FormCtrl as formCtrl',
         authenticate: {
-          loggedIn: true,
-          // authorized
+          authorized: 'draft'
         }
       });
   });

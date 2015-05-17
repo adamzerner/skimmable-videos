@@ -26,6 +26,19 @@ exports.show = function(req, res) {
     });
 };
 
+// Search for a skim by title
+exports.search = function(req, res) {
+  Skim
+    .find({
+      title: new RegExp(req.params.text, 'i')
+    })
+    .populate('author')
+    .exec(function(err, skims) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, skims);
+    });
+}
+
 // Creates a new skim in the DB.
 exports.create = function(req, res) {
   Skim.create(req.body, function(err, skim) {

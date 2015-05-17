@@ -1,0 +1,12 @@
+#navbar-template {
+  .navbar-form {
+    @media (min-width: 992px) {
+      input {
+        width: 450px;
+      }
+    }
+    button {
+      padding-top: 7px;
+    }
+  }
+}

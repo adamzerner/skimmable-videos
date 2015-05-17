@@ -7,12 +7,20 @@
 angular.module('skimmableVideosApp')
   .controller('SkimsCtrl', SkimsCtrl);
 
-function SkimsCtrl(Skim) {
+function SkimsCtrl(Skim, $stateParams) {
   var vm = this;
-  Skim.list()
-    .success(function(skims) {
-      vm.skims = skims;
-    });
+  if ($stateParams.text) {
+    Skim.search($stateParams.text)
+      .success(function(skims) {
+        vm.skims = skims;
+      });
+  }
+  else {
+    Skim.list()
+      .success(function(skims) {
+        vm.skims = skims;
+      });
+  }
 }
 
 

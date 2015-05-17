@@ -27,6 +27,10 @@ angular.module('skimmableVideosApp')
       return state === $state.current.name;
     };
 
+    $scope.search = function() {
+      $state.go('skims', {text: $scope.searchText}, {reload: true});
+    };
+
     $rootScope.$on('refresh_navbar', function() {
       $scope.currentUser = Auth.getCurrentUser();
     });

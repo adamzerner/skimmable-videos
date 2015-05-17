@@ -31,6 +31,10 @@ angular.module('skimmableVideosApp')
       return $http.get('/api/skims/'+id);
     };
 
+    this.search = function(text) {
+      return $http.get('/api/skims/search/'+text);
+    };
+
     this.delete = function(id) {
       $http.delete('/api/skims/'+id)
         .success(function() {

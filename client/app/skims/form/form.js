@@ -24,7 +24,7 @@ angular.module('skimmableVideosApp')
         templateUrl: 'app/skims/form/form.html',
         controller: 'FormCtrl as formCtrl',
         authenticate: {
-          authorized: 'draft'
+          loggedIn: true
         }
       });
   });

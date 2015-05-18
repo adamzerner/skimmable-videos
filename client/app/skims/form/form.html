@@ -1,3 +1,4 @@
+
 <div class='page-header'>
   <h1>{{formCtrl.state}} <span ng-show="formCtrl.state === 'Create'">a</span> Skim</h1>
 </div>
@@ -42,7 +43,25 @@
     ng-click='formCtrl.saveToDrafts()'>
     Save to Drafts
   </button>
+  <button
+    class='btn btn-default btn-sm'
+    type='button'
+    ng-show='formCtrl.canShare()'
+    ng-click='formCtrl.triggerSharePopoverLinkFocus()'
+    popover-template='formCtrl.popoverTemplate'>
+    Share
+  </button>
   <span id='flash' class='bg-success' ng-show='formCtrl.flash'>Saved</span>
+
+<script type="text/ng-template" id="popoverTemplate.html">
+  <p>Send this link to someone if you want to let them collaborate.</p>
+  <input id='sharePopoverLink' class='form-control' value='{{formCtrl.link}}'><br />
+  <ul>
+    <li>They'll have to log in.</li>
+    <li>They'll be able to update the draft, but the draft will still be under your name.</li>
+    <li>If they click "Create Skim", it'll create the Skim under their name, and remove it from your Drafts.</li>
+  </ul>
+</script>
 
   <supersection 
     ng-repeat='section in formCtrl.skim.sections'

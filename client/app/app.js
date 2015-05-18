@@ -58,23 +58,10 @@ angular.module('skimmableVideosApp', [
               // make sure it is equal to Auth.getCurrentUser()._id
               Skim.get(params.id)
                 .success(function(skim) {
-                  if (Auth.getCurrentUser()._id !== skim.author) {
+                  if (Auth.getCurrentUser()._id !== skim.author._id) {
                     alert("You aren't authorized to access this route.");
                     $location.path('/login');
                   }
-                });
-            }
-            else if (next.authenticate.authorized === 'draft') {
-              Draft.get(params.draftId)
-                .success(function(draft) {
-                  console.log('in success');
-                  if (Auth.getCurrentUser()._id !== draft.author) {
-                    alert("You aren't authorized to access this route.");
-                    $location.path('/login');
-                  }
-                })
-                .error(function() {
-                  console.log('error');
                 });
             }
           }

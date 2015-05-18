@@ -6,9 +6,9 @@
 angular.module('skimmableVideosApp')
   .controller('FormCtrl', FormCtrl);
 
-function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview, Draft, $timeout) {
+function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview, Draft, $timeout, $location) {
   var vm = this;
-  var draftId = $stateParams.draftId;
+  vm.draftId = $stateParams.draftId;
   vm.skim = {
     author: Auth.getCurrentUser()._id,
     sections: [
@@ -47,9 +47,9 @@ function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview, Draft, $tim
       });
   }
   // DRAFT
-  else if (draftId) {
+  else if (vm.draftId) {
     vm.state = 'Create';
-    Draft.get(draftId)
+    Draft.get(vm.draftId)
       .success(function(draft) {
         vm.skim = draft;
         vm.skim.author = vm.skim.author._id;
@@ -69,9 +69,10 @@ function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview, Draft, $tim
 
   vm.submit = function() {
     if (vm.state === 'Create') {
-      if (draftId) {
-        Draft.delete(draftId)
+      if (vm.draftId) {
+        Draft.delete(vm.draftId)
           .success(function() {
+            vm.skim.author = Auth.getCurrentUser()._id; // when a Skim is created, make sure the author is the person who clicked Create. this might not be the Draft author.
             Skim.create(vm.skim);
           });
       }
@@ -89,8 +90,8 @@ function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview, Draft, $tim
   };
 
   vm.saveToDrafts = function() {
-    if (draftId) {
-      Draft.update(draftId, vm.skim)
+    if (vm.draftId) {
+      Draft.update(vm.draftId, vm.skim)
         .success(function() {
           vm.flash = true;
           $timeout(function() {
@@ -101,13 +102,23 @@ function FormCtrl($stateParams, $http, API_KEY, Auth, Skim, Preview, Draft, $tim
     else {  
       Draft.create(vm.skim)
         .success(function(draft) {
-          draftId = draft._id;
+          vm.draftId = draft._id;
           vm.flash = true;
           $timeout(function() {
             vm.flash = false;
           }, 1000);
         });
     }
+  };
+
+  vm.canShare = function() {
+    // can only shrea if a) it's a draft page and b) you're the author of the draft
+    return !!$stateParams.draftId && vm.skim.author === Auth.getCurrentUser()._id;
+  };
+  vm.popoverTemplate = 'popoverTemplate.html';
+  vm.link = $location.absUrl();
+  vm.triggerSharePopoverLinkFocus = function() {
+    angular.element('#sharePopoverLink').select();
   };
 }
 

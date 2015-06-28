@@ -4,15 +4,21 @@
   <h2>
     {{showCtrl.skim.title}}
     <small>{{ showCtrl.getDuration() }}</small>
-    <span 
-      class='glyphicon glyphicon-star-empty'
-      ng-show='showCtrl.loggedIn() && !showCtrl.starred()'
-      ng-click='showCtrl.star()'>
+    <span ng-show="showCtrl.loggedIn() && showCtrl.state === 'show'">
+      <span 
+        class='glyphicon glyphicon-star-empty'
+        ng-show='!showCtrl.starred()'
+        ng-click='showCtrl.star()'>
+      </span>
+      <span 
+        class='glyphicon glyphicon-star'
+        ng-show='showCtrl.starred()'
+        ng-click='showCtrl.star()'>
+      </span>
     </span>
-    <span 
-      class='glyphicon glyphicon-star'
-      ng-show='showCtrl.loggedIn() && showCtrl.starred()'
-      ng-click='showCtrl.star()'>
+    <!-- star shouldn't be clickable in preview state -->
+    <span ng-show="showCtrl.loggedIn() && showCtrl.state === 'preview'">
+      <span class='glyphicon glyphicon-star-empty' style='cursor: auto;'></span>
     </span>
   </h2>
 

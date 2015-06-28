@@ -11,6 +11,7 @@ function ShowCtrl (Skim, $stateParams, Preview, Utils, User, Auth) {
   var vm = this;
 
   if ($stateParams.id) { // show
+    vm.state = 'show';
     Skim.get($stateParams.id)
       .success(function(skim) {
         vm.skim = skim;     
@@ -18,6 +19,7 @@ function ShowCtrl (Skim, $stateParams, Preview, Utils, User, Auth) {
       .then(afterSkimRetrieved);
   }
   else { // preview
+    vm.state = 'preview';
     Preview.get($stateParams.previewId)
       .success(function(skim) {
         vm.skim = skim;

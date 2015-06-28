@@ -17,12 +17,17 @@
 
   <div class='row'>
     <div class='col-xs-3'>
-      <setbox curr='sectionCtrl.section' player='sectionCtrl.player'></setbox>
+      <setbox 
+        curr='sectionCtrl.section' 
+        player='sectionCtrl.player'
+        hours='sectionCtrl.hours'>
+      </setbox>
     </div>
     <div class='col-xs-9'>
       <subsection 
         ng-repeat='subsection in sectionCtrl.section.subsections track by $index'
         subsection='subsection'
+        hours='sectionCtrl.hours'
         parent-number='sectionCtrl.number'
         number='$index+1'
         player='sectionCtrl.player'>

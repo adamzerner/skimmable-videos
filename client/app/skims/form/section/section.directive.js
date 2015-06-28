@@ -10,6 +10,7 @@ angular.module('skimmableVideosApp')
       templateUrl: 'app/skims/form/section/section.html',
       scope: {
         section: '=',
+        hours: '=',
         number: '=',
         player: '=',
         removeSection: '&'

@@ -16,12 +16,14 @@
 
   <label>Start Time</label>
   <div class='time-inputs visible-lg-block'>
-    <input
-      class='form-control input-sm'
-      ng-model='setboxCtrl.curr.hour'
-      type='number'
-      placeholder='hh'
-      required> : 
+    <span ng-show='setboxCtrl.hours > 0'>
+      <input
+        class='form-control input-sm'
+        ng-model='setboxCtrl.curr.hour'
+        type='number'
+        placeholder='hh'
+        required> :
+    </span> 
     <input
       class='form-control input-sm'
       ng-model='setboxCtrl.curr.minute'
@@ -40,8 +42,8 @@
       max='59'>
   </div>
   <div class='hidden-lg'>
-    <span>{{setboxCtrl.curr.hour}}</span> : 
-    <span>{{setboxCtrl.curr.minute}}</span> : 
+    <span ng-show='setboxCtrl.hours > 0'>{{setboxCtrl.curr.hour}} : </span>
+    <span>{{setboxCtrl.curr.minute}} : </span>
     <span>{{setboxCtrl.curr.second}}</span>
   </div>
   <button 

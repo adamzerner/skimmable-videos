@@ -13,7 +13,8 @@ angular.module('skimmableVideosApp')
       templateUrl: 'app/skims/form/setbox/setbox.html',
       scope: {
         curr: '=',
-        player: '='
+        player: '=',
+        hours: '='
       },
       bindToController: true,
       controller: SetboxCtrl,

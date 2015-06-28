@@ -10,7 +10,7 @@ angular.module('skimmableVideosApp')
       'link': '/upload'
     }, {
       'title': 'Help',
-      'link': '/show/549c6a9b8869c70200d97ec4'
+      'link': '/show/558f6fdac240320300d8f1e8'
     }];
 
     $scope.isCollapsed = true;

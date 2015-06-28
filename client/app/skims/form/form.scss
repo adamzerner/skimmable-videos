@@ -22,4 +22,7 @@ form[name='form'] {
   #flash.ng-hide {
     opacity: 0;
   }
+  .ng-dirty.ng-invalid {
+    border: 1px solid #c0392b;
+  }
 }
